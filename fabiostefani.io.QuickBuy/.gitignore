@@ -1,0 +1,10 @@
+# Compiled source #
+###################
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+bin/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
