@@ -1,8 +1,10 @@
+using fabiostefani.io.QuickBuy.Repositorio.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +14,8 @@ namespace fabiostefani.io.QuickBuy.Web
     {
         public Startup(IConfiguration configuration)
         {
+            //var build = new ConfigurationBuilder();
+            //build.AddJsonFile();
             Configuration = configuration;
         }
 
@@ -20,6 +24,11 @@ namespace fabiostefani.io.QuickBuy.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<QuickBuyContexto>(options =>
+                 options.UseLazyLoadingProxies()
+                        .UseNpgsql("Host = localhost; Port = 5432; Pooling = true; Database = QuickBuy; User Id = postgres; Password = Postgres2019;", m => m.MigrationsAssembly("fabiostefani.io.QuickBuy.Repositorio"))
+            );
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory
