@@ -1,4 +1,6 @@
+using fabiostefani.io.QuickBuy.Dominio.Contratos;
 using fabiostefani.io.QuickBuy.Repositorio.Contexto;
+using fabiostefani.io.QuickBuy.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +30,10 @@ namespace fabiostefani.io.QuickBuy.Web
                  options.UseLazyLoadingProxies()
                         .UseNpgsql("Host = localhost; Port = 5432; Pooling = true; Database = QuickBuy; User Id = postgres; Password = Postgres2019;", m => m.MigrationsAssembly("fabiostefani.io.QuickBuy.Repositorio"))
             );
+
+            services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
