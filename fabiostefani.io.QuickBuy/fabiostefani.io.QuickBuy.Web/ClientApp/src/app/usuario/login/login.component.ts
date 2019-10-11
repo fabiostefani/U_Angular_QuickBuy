@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Usuario } from 'src/app/modelo/usuario';
 
 @Component({
     selector: 'app-login',
@@ -7,10 +8,16 @@ import { Component } from '@angular/core'
 })
 
 export class LoginComponent {
-    public email = "fabio@teste.com";
-    public senha = "1254";
+    public usuario: Usuario;
+    public usuarioAutenticado: boolean;
+
+    constructor() {
+        this.usuario = new Usuario();
+    }
 
     entrar() {
-        alert(this.email + this.senha);
+        if (this.usuario.email == "fabio@teste.com" && this.usuario.senha == "123654") {
+            this.usuarioAutenticado = true;
+        }
     }
 }
