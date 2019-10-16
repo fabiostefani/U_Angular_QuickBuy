@@ -79,8 +79,7 @@ namespace fabiostefani.io.QuickBuy.Web
                 if (env.IsDevelopment())
                 {
                     //spa.UseAngularCliServer(npmScript: "start"); //ISSO FAZ COM QUE O ANGULAR SEJA CARREGADO JUNTO COM O ASPNET CORE.
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
-                    //spa.UseSpaPrerendering(new SpaPrerenderingOptions().)
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");                    
                 }
             });
         }

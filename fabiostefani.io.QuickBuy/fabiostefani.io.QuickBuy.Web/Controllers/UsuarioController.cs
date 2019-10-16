@@ -42,7 +42,23 @@ namespace fabiostefani.io.QuickBuy.Web.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
 
+        [HttpPost("Validar")]
+        public IActionResult Validar([FromBody] Usuario usuario)
+        {
+            try
+            {
+                if (usuario.Email == "fabio@teste.com" && usuario.Senha == "123654")
+                {                    
+                    return Ok(usuario);
+                }
+                return BadRequest("Usuário ou senha inválidos");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -40,6 +40,10 @@
 
         <button class="btn btn-primary btn-block mb-3" type="submit" (click)="entrar()">Entrar</button>
 
+        <div class="aler alert-danger" *ngIf="mensagem">
+            {{mensagem}}
+        </div>
+
         <img src="../../../assets/img/quick-b-logo.jpg">
         <div class="alert alert-primary" role="alert" *ngIf="usuarioAutenticado">
             Usuário autenticado

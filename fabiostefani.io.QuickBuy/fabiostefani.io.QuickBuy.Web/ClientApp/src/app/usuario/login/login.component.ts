@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Usuario } from 'src/app/modelo/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UsuarioServico } from 'src/app/servicos/usuario/usuario.servico';
 
 @Component({
     selector: 'app-login',
@@ -10,10 +11,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 export class LoginComponent implements OnInit {
     public usuario: Usuario;
-    // public usuarioAutenticado: boolean;
     public returnUrl: string;
+    public mensagem: string;
 
-    constructor(private router: Router, private activatedRouter: ActivatedRoute) {
+    constructor(private router: Router, private activatedRouter: ActivatedRoute,
+        private usuarioServico: UsuarioServico) {
 
     }
 
@@ -23,9 +25,30 @@ export class LoginComponent implements OnInit {
     }
 
     entrar() {
-        if (this.usuario.email == "fabio@teste.com" && this.usuario.senha == "123654") {
-            sessionStorage.setItem("usuario-autenticado", "1");
-            this.router.navigate([this.returnUrl]);
-        }
+        this.usuarioServico.verificarUsuario(this.usuario)
+            .subscribe(
+                usuario_json => {
+                    // var usuarioRetorno: Usuario;
+                    // usuarioRetorno = data;
+
+                    // sessionStorage.setItem("usuario-autenticado", "1");
+                    // sessionStorage.setItem("email-usuario", usuarioRetorno.email);
+                    this.usuarioServico.usuario = usuario_json;
+
+                    if (this.returnUrl == null) {
+                        this.router.navigate(['/']);
+                    } else {
+                        this.router.navigate([this.returnUrl]);
+                    }
+                },
+                err => {
+                    console.log(err.error);
+                    this.mensagem = err.error;
+                }
+            );
+        // if (this.usuario.email == "fabio@teste.com" && this.usuario.senha == "123654") {
+        //     sessionStorage.setItem("usuario-autenticado", "1");
+        //     
+        // }
     }
 }
