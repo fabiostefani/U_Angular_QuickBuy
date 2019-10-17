@@ -49,7 +49,7 @@ namespace fabiostefani.io.QuickBuy.Web.Controllers
         {
             try
             {
-                if (usuario.Email == "fabio@teste.com" && usuario.Senha == "123654")
+                if (_usuarioRepositorio.ExisteUsuarioPorUsuarioSenha(usuario))
                 {                    
                     return Ok(usuario);
                 }
