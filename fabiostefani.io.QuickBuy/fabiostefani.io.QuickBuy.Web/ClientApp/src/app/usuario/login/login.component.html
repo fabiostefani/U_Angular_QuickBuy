@@ -44,6 +44,10 @@
             Entrar
         </button>
 
+        <div>
+            <a [routerLink]='["/novo-usuario"]'>Novo por aqui?</a>
+        </div>
+
         <div class="aler alert-danger" *ngIf="mensagem">
             {{mensagem}}
         </div>
