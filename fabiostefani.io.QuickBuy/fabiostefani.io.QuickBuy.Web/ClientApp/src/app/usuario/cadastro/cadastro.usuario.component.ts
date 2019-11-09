@@ -10,6 +10,8 @@ import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 
 export class CadastroUsuarioComponent implements OnInit {
     public usuario: Usuario;
+    public mensagem: string;
+    private ativarSpinner: boolean;
 
     constructor(private usuarioServico: UsuarioServico) {
 
@@ -19,15 +21,15 @@ export class CadastroUsuarioComponent implements OnInit {
     }
 
     public cadastrar() {
-        alert("Nome:" + this.usuario.nome);
-        alert("Sobrenome:" + this.usuario.sobreNome);
-        alert("Email:" + this.usuario.email);
-        alert("Senha:" + this.usuario.senha);
-        // this.usuarioServico.cadastrarUsuario(this.usuario)
-        //     .subscribe(
-        //         usuarioJson => { },
-        //         erro => { }
-        //     );
+        this.usuarioServico.cadastrarUsuario(this.usuario)
+            .subscribe(
+                usuarioJson => { },
+                erro => {
+                    console.log(erro.error);
+                    this.mensagem = erro.error;
+                    this.ativarSpinner = false;
+                }
+            );
     }
 }
 
