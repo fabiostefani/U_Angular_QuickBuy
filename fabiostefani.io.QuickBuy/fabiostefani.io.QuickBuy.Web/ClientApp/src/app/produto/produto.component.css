@@ -1,0 +1,15 @@
+.custom-file-input:lang(en)~.custom-file-label::after {
+    content: "Selecionar";
+}
+
+.titulo {
+    color: #999;
+}
+
+.invalid-feedback {
+    display: block;
+}
+
+.valid-feedback {
+    display: block;
+}
