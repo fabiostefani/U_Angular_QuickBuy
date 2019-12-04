@@ -35,6 +35,12 @@ namespace fabiostefani.io.QuickBuy.Web.Controllers
         {
             try
             {
+                var usuarioExiste = _usuarioRepositorio.UsuarioJaCadastrado(usuario.Email);
+                if (usuarioExiste)
+                {
+                    return BadRequest("Usuário já cadastrado no sistema.");
+                }
+
                 _usuarioRepositorio.Adicionar(usuario);
                 return Created("api/usuario", usuario);
             }
@@ -49,9 +55,10 @@ namespace fabiostefani.io.QuickBuy.Web.Controllers
         {
             try
             {
-                if (_usuarioRepositorio.ExisteUsuarioPorUsuarioSenha(usuario))
+                var usuarioCadastrado = _usuarioRepositorio.ExisteUsuarioPorUsuarioSenha(usuario);
+                if (usuarioCadastrado != null)
                 {                    
-                    return Ok(usuario);
+                    return Ok(usuarioCadastrado);
                 }
                 return BadRequest("Usuário ou senha inválidos");
             }

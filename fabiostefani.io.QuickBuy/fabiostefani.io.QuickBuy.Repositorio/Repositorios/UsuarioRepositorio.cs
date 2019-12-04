@@ -13,9 +13,14 @@ namespace fabiostefani.io.QuickBuy.Repositorio.Repositorios
 
         }
 
-        public bool ExisteUsuarioPorUsuarioSenha(Usuario usuario)
+        public Usuario ExisteUsuarioPorUsuarioSenha(Usuario usuario)
         {
-            return ObterTodos().Any(x => x.Email == usuario.Email && x.Senha == usuario.Senha);
+            return ObterTodos().FirstOrDefault(x => x.Email == usuario.Email && x.Senha == usuario.Senha);
+        }
+
+        public bool UsuarioJaCadastrado(string email)
+        {
+            return ObterTodos().Any(x => x.Email == email);
         }
     }
 }

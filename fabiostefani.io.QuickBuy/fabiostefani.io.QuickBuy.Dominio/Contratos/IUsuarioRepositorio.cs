@@ -4,6 +4,7 @@ namespace fabiostefani.io.QuickBuy.Dominio.Contratos
 {
     public interface IUsuarioRepositorio : IBaseRepositorio<Usuario>
     {
-        bool ExisteUsuarioPorUsuarioSenha(Usuario usuario);
+        Usuario ExisteUsuarioPorUsuarioSenha(Usuario usuario);
+        bool UsuarioJaCadastrado(string email);
     }
 }
